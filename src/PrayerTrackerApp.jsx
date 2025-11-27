@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Check, Lock, Users, LogOut, Trophy } from 'lucide-react';
+import LoginRegisterForm from './components/LoginRegisterForm';
+import MainApp from './components/MainApp';
 
 // API Configuration
 const API_URL = 'https://prayer-tracker-api.onrender.com'; // Replace with your Render URL
@@ -80,28 +82,30 @@ const PrayerTrackerApp = () => {
   // (Copy from previous artifact or simplify)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
-      <div className="max-w-4xl mx-auto">
-        {!authToken ? (
-          <LoginRegisterForm 
-            onLogin={handleLogin}
-            onRegister={handleRegister}
-            error={error}
-            success={success}
-            loading={loading}
-          />
-        ) : (
-          <MainApp
-            user={currentUser}
-            api={api}
-            onLogout={handleLogout}
-            error={error}
-            success={success}
-            loading={loading}
-          />
-        )}
-      </div>
-    </div>
+    <>
+      {!authToken ? (
+        <LoginRegisterForm 
+          onLogin={handleLogin}
+          onRegister={handleRegister}
+          error={error}
+          success={success}
+          loading={loading}
+        />
+      ) : (
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
+          <div className="max-w-4xl mx-auto">
+            <MainApp
+              user={currentUser}
+              api={api}
+              onLogout={handleLogout}
+              error={error}
+              success={success}
+              loading={loading}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
